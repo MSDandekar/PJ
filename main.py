@@ -1,9 +1,5 @@
 import os
-import pickledb
 from flask import *
-
-usersTable = pickledb.load(os.path.join("static", "Database", "users.db"), False)
-usersTable.set('key', 'value')
 
 app = Flask(__name__)
 
