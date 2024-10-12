@@ -10,4 +10,5 @@ a{
 
 li{
   list-style-type: None;
+  white-space: pre-wrap;
 }

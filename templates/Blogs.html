@@ -14,34 +14,21 @@
 <body>
 	<center>
 		<h2>PJ</h2>
-	</center>
+		<br><br>
 
-	<ul>
-		<li>{{profileData['userName']}}</li>
-		<li>{{profileData['userID']}}</li>
-		<li>{{profileData['userEmail']}}</li>
-		<li>Follwers : 0</li>
-		<li>Following: 0</li>
-		<li>Blog Score: 0</li>
-	</ul>
+		{%for blog in blogs%}
+		<ul>
+			<!-- <li>{{blog}}</li> -->
+			<li><a href="#">{{blog['userID']}}<a></li>
+			<li>{{blog['dateTime']}}</li>
+			<li><b>{{blog['blogTitle']}}:</b></li>
+			<li>{{blog['blog']}}</li>
+		</ul>
 
-	<br><br>
+		<br><br>
+		{%endfor%}
 
-	<form method="POST" action="/b-blog">
-		<input type="text" name="blogTitle" placeholder="TITLE">
-		<br>
-		<textarea name="blog"></textarea>
-		<br>
-		<button type="sumbit">Submit</button>
-	</form>
-
-	<br><br>
-
-	<center>
-		<form method="POST" action="/b-logout">
-			<button type="sumbit">Logout</button>
-		</form>
-		<a href="/blogs">Blogs</a>
+		<a href="/profile">Profile</a>
 	</center>
 </body>
 </html>
