@@ -14,27 +14,12 @@
 <body>
 	<center>
 		<h2>PJ</h2>
-
-		<form method="POST" action="/b-signup">
-			<label>Name: </label>
-			<input type="text" name="userName" required>
-			<br>
-			<label>User ID: </label>
-			<input type="text" name="userID" required>
-			<br>
-			<label>Email: </label>
-			<input type="mail" name="userEmail" required>
-			<br>
-			<label>Password: </label>
-			<input type="password" name="userPassword" required>
-			<br>
-			<button type="sumbit">Signup</button>
-		</form>
-
-		<br><br>
-
-		<a href="/">Home</a>
-		<a href="/login">Login</a>
 	</center>
+
+	<ul>
+		<li>{{profileData[0]}}</li>
+		<li>{{profileData[1]}}</li>
+		<li>{{profileData[2]}}</li>
+	</ul>
 </body>
 </html>
