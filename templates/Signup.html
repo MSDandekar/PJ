@@ -15,24 +15,25 @@
 	<center>
 		<h2>PJ</h2>
 
-		<form method="POST" action="#">
+		<form method="POST" action="/b-signup">
 			<label>Name: </label>
-			<input type="text" name="userName">
+			<input type="text" name="userName" required>
 			<br>
 			<label>User Name: </label>
-			<input type="text" name="userID">
+			<input type="text" name="userID" required>
 			<br>
 			<label>Email: </label>
-			<input type="mail" name="userEmail">
+			<input type="mail" name="userEmail" required>
 			<br>
 			<label>Password: </label>
-			<input type="password" name="userPassword">
+			<input type="password" name="userPassword" required>
 			<br>
-			<button type="sumbit">Login</button>
+			<button type="sumbit">Signup</button>
 		</form>
 
 		<br><br>
 
+		<a href="/">Home</a>
 		<a href="/login">Login</a>
 	</center>
 </body>
