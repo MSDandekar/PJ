@@ -12,3 +12,8 @@ li{
   list-style-type: None;
   white-space: pre-wrap;
 }
+
+img{
+  width: 80px;
+  height: 80px;
+}

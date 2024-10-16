@@ -16,21 +16,22 @@
 		<h2>PJ</h2>
 		<br><br>
 
-		{%for blog in blogs%}
-		<div>
-			<a href="#">{{blog['userID']}}<a>
-			<br>
-			{{blog['dateTime']}}
-			<br>
-			<b>{{blog['blogTitle']}}:</b>
-			<br>
-			{{blog['blog']}}
-		</div>
+		<form method="GET" action="">
+			<input type="text" name="userSearch" placeholder="User ID">
+			<button type="sumbit">Search</button>
+		</form>
+		<br><br>
 
+		{%for user in users%}
+		<img src="{{dp}}/{{user['userID']}}.png">
+		<br>
+		<a href="#">{{user['userID']}}</a>
+		<form method="POST" action="">
+			<button type="sumbit">Follow</button>
+		</form>
 		<br><br>
 		{%endfor%}
 
-		<br>
 		<a href="/profile">Profile</a>
 	</center>
 </body>

@@ -36,6 +36,12 @@ def blogs():
 		return render_template("Blogs.html", blogs=blogsTable.all())
 	return redirect(url_for("index"))
 
+@app.route("/users")
+def users():
+	if session.get("userID"):
+		return render_template("Users.html", users=usersTable.all(), dp=os.path.join("static", "DP"))
+	return redirect(url_for("index"))
+
 @app.route("/b-signup", methods=["POST"])
 def b_signup():
 	if request.method == "POST":
