@@ -14,26 +14,19 @@
 <body>
 	<center>
 		<h2>PJ</h2>
-		<br><br>
+	</center>
 
-		<form method="GET" action="">
-			<input type="text" name="userSearch" placeholder="User ID">
-			<button type="sumbit">Search</button>
-		</form>
-		<br><br>
+	<ul>
+		<li>{{user['userName']}}</li>
+		<li>{{user['userID']}}</li>
+		<li>{{user['userEmail']}}</li>
+	</ul>
 
-		{%for user in users%}
-		<img src="{{dp}}/{{user['userID']}}.png">
-		<br>
-		<a href="#">{{user['userID']}}</a>
-		<form method="POST" action="/b-follow/{{user['userID']}}">
-			<button type="sumbit">Follow</button>
-		</form>
-		<br><br>
-		{%endfor%}
+	<br><br>
 
-		<a href="/profile">Profile</a>
+	<center>
 		<a href="/blogs">Blogs</a>
+		<a href="/users">Users</a>
 	</center>
 </body>
 </html>

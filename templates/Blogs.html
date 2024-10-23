@@ -18,13 +18,12 @@
 
 		{%for blog in blogs%}
 		<div>
-			<a href="#">{{blog['userID']}}<a>
+			<a href="/users/{{blog['userID']}}">{{blog['userID']}}<a>
 			<br>
-			{{blog['dateTime']}}
+			{{blog['uploadTime']}}
 			<br>
 			<b>{{blog['blogTitle']}}:</b>
-			<br>
-			{{blog['blog']}}
+			<p>{{blog['blog']}}</p>
 		</div>
 
 		<br><br>
@@ -32,6 +31,7 @@
 
 		<br>
 		<a href="/profile">Profile</a>
+		<a href="/users">Users</a>
 	</center>
 </body>
 </html>

@@ -2,13 +2,26 @@
   font-family: "Jura", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+/*  color: yellow;*/
+}
+
+button{
+/*  color: black;*/
+}
+
+input{
+/*  color: black;*/
+}
+
+body{
+/*  background-image: url("../Images/Wallpaper.jpeg");*/
 }
 
 a{
   text-decoration: None;
 }
 
-li{
+p{
   list-style-type: None;
   white-space: pre-wrap;
 }
