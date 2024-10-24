@@ -90,7 +90,8 @@ def signup():
 def profile():
 	if session.get("userID"):
 		return render_template(
-			"Profile.html", 
+			"Profile.html",
+			dpLocation = os.path.join("static", "DP"),
 			profileData=sql_fetchSpecificUser(session['userID']), 
 			following=len(sql_fetchFollowUsers(session['userID'], 0)), 
 			followers=len(sql_fetchFollowUsers(session['userID'], 1))
