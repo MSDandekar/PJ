@@ -6,7 +6,7 @@ import mysql.connector
 db = mysql.connector.connect(
 	host = "localhost",
 	user = "root",
-	password = "******",
+	password = "*****",
 	database = "PJ"
 )
 cursor = db.cursor(dictionary=True)
@@ -23,7 +23,7 @@ def sql_fetchAllUsers():
 	return resultset
 
 def sql_insertUsers(userName, userID, userEmail, userPassword):
-	sql = "INSERT INTO Users (userName, userID, userEmail, userPassword) VALUES (%s, %s, %s, %s)"
+	sql = "INSERT INTO Users (userName, userID, userEmail, userPassword, userDP) VALUES (%s, %s, %s, %s, 'Default.png')"
 	cursor.execute(sql, (userName, userID, userEmail, userPassword))
 	db.commit()
 
@@ -69,6 +69,15 @@ def sql_followRequest(userID):
 	cursor.execute(sql, (session['userID'], userID))
 	db.commit()
 
+def sql_searchUser(userID):
+	sql = "SELECT * FROM Users WHERE UserID LIKE '%{}%'"
+	cursor.execute(sql.format(userID))
+
+	resultset = cursor.fetchall()
+
+	return resultset
+
+
 @app.route("/")
 def index():
 	return render_template("Login.html")
@@ -93,7 +102,7 @@ def blogs():
 	if session.get("userID"):
 		return render_template(
 			"Blogs.html", 
-			blogs=sql_fetchAllBlogs()
+			blogs = sql_fetchAllBlogs()
 		)
 
 	return redirect(url_for("index"))
@@ -101,12 +110,16 @@ def blogs():
 @app.route("/users")
 def users():
 	if session.get("userID"):
-		return render_template(
-			"Users.html", 
-			users=sql_fetchAllUsers(), 
-			dp=os.path.join("static", "DP")
-		)
 
+		paraUserID = request.args.get("userSearch")
+
+
+		return render_template(
+				"Users.html", 
+				users = sql_fetchAllUsers() if paraUserID == None else sql_searchUser(paraUserID),
+				following = sql_fetchFollowUsers(session['userID'], 0),
+				dpLocation = os.path.join("static", "DP")
+			)
 	return redirect(url_for("index"))
 
 @app.route("/users/<userID>")
@@ -127,6 +140,7 @@ def b_signup():
 		userPassword = request.form["userPassword"]
 
 		sql_insertUsers(userName, userID, userEmail, userPassword)
+
 	else:
 		print("Signup ERROR!")
 	return redirect(url_for("index"))
@@ -144,13 +158,14 @@ def b_login():
 
 		print(resultset)
 
-		if (userID == resultset["userID"]) and (userPassword == resultset["userPassword"]):
-			
-			session["userName"] = resultset["userName"]
-			session["userID"] = resultset["userID"]
-			session["userEmail"] = resultset["userEmail"]
+		if resultset != None:
+			if (userID == resultset["userID"]) and (userPassword == resultset["userPassword"]):
+				
+				session["userName"] = resultset["userName"]
+				session["userID"] = resultset["userID"]
+				session["userEmail"] = resultset["userEmail"]
 
-			return redirect(url_for("profile"))
+				return redirect(url_for("profile"))
 		else:
 			print("Incorrect Info!")
 	return redirect(url_for("index"))

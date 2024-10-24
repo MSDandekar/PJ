@@ -23,12 +23,14 @@
 		<br><br>
 
 		{%for user in users%}
-		<img src="{{dp}}/{{user['userID']}}.png">
+		<img src="{{dpLocation}}/{{user['userDP']}}">
 		<br>
-		<a href="#">{{user['userID']}}</a>
+		<a href="/users/{{user['userID']}}">{{user['userID']}}</a>
+
 		<form method="POST" action="/b-follow/{{user['userID']}}">
 			<button type="sumbit">Follow</button>
 		</form>
+		
 		<br><br>
 		{%endfor%}
 
