@@ -27,9 +27,15 @@
 		<br>
 		<a href="/users/{{user['userID']}}">{{user['userID']}}</a>
 
+		{% if user['Following'] == 0 %}
 		<form method="POST" action="/b-follow/{{user['userID']}}">
 			<button type="sumbit">Follow</button>
 		</form>
+
+		{% else %}
+		<br>
+		<button disabled>Following</button>
+		{% endif %}
 		
 		<br><br>
 		{%endfor%}

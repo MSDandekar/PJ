@@ -77,6 +77,24 @@ def sql_searchUser(userID):
 
 	return resultset
 
+def followingChecker(users, following):
+	for user in users:
+		if len(following) > 0:
+			for followingUser in following:
+				if followingUser['following'] == user['userID']:
+					user['Following'] = 1
+					break
+				else:
+					user['Following'] = 0
+		else:
+			user['Following'] = 0
+
+	print(users)
+	print(following)
+
+	return users
+
+
 
 @app.route("/")
 def index():
@@ -113,12 +131,12 @@ def users():
 	if session.get("userID"):
 
 		paraUserID = request.args.get("userSearch")
-
+		following = sql_fetchFollowUsers(session['userID'], 0)
+		
 
 		return render_template(
 				"Users.html", 
-				users = sql_fetchAllUsers() if paraUserID == None else sql_searchUser(paraUserID),
-				following = sql_fetchFollowUsers(session['userID'], 0),
+				users = followingChecker(sql_fetchAllUsers(), following) if paraUserID == None else followingChecker(sql_searchUser(paraUserID), following),
 				dpLocation = os.path.join("static", "DP")
 			)
 	return redirect(url_for("index"))
