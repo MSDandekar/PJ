@@ -6,7 +6,7 @@ import mysql.connector
 db = mysql.connector.connect(
 	host = "localhost",
 	user = "root",
-	password = "*****",
+	password = "******",
 	database = "PJ"
 )
 cursor = db.cursor(dictionary=True)
@@ -69,9 +69,9 @@ def sql_followRequest(userID):
 	cursor.execute(sql, (session['userID'], userID))
 	db.commit()
 
-def sql_searchUser(userID):
-	sql = "SELECT * FROM Users WHERE UserID LIKE '%{}%'"
-	cursor.execute(sql.format(userID))
+def sql_searchUser(paraUserID, userID):
+	sql = "SELECT * FROM Users WHERE userID != %s AND userID LIKE '%{}%'"
+	cursor.execute((sql.format(paraUserID)), (userID, ))
 
 	resultset = cursor.fetchall()
 
@@ -136,7 +136,7 @@ def users():
 
 		return render_template(
 				"Users.html", 
-				users = followingChecker(sql_fetchAllUsers(), following) if paraUserID == None else followingChecker(sql_searchUser(paraUserID), following),
+				users = followingChecker(sql_fetchAllUsers(), following) if paraUserID == None else followingChecker(sql_searchUser(paraUserID, session['userID']), following),
 				dpLocation = os.path.join("static", "DP")
 			)
 	return redirect(url_for("index"))
